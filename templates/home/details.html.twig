@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details du contact
+{% endblock %}
+
+{% block body %}
+
+	<div class="card text-center" style="width: 60%;flex-direction:row; margin:auto; margin-top:50px;">
+		<img class="card-img-top" style="width: 30%;" src=" {{user.profilePicture}} " alt=" ">
+		<div class="card-body">
+			<h5 class="card-title">{{user.firstName|capitalize}}
+				{{user.lastName|upper}}</h5>
+			<p class="card-text">{{user.sector}}</p>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">email :
+					{{user.email}}</li>
+			</ul>
+		</div>
+	</div>
+
+{% endblock %}

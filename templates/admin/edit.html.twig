@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'employé
+{% endblock %}
+
+{% block body %}
+	<h1>Modifier l'employé</h1>
+
+	{{ include('admin/_form.html.twig', {'button_label': 'Update'}) }}
+
+	<a href="{{ path('app_admin_index') }}">Retour à la liste</a>
+
+	{{ include('admin/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+	{{parent()}}
+	<script>
+		contractTypeInput = document.querySelector("#user_contractType");
+contractExpirationInput = document.querySelector("#user_contractExpirationDate");
+contractExpirationInputContainer = document.querySelector("#user_contractExpirationDate").parentNode;
+if (contractTypeInput.value === "CDI") {
+contractExpirationInputContainer.value = null
+contractExpirationInputContainer.style.display = "none"
+}
+contractTypeInput.addEventListener("change", (ev) => {
+if (ev.target.value === 'CDI') {
+contractExpirationInput.value = null;
+contractExpirationInputContainer.style.display = 'none'
+} else {
+contractExpirationInputContainer.style.display = 'block'
+}
+})
+	</script>
+{% endblock %}

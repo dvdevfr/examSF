@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerer les Employés
+{% endblock %}
+
+{% block body %}
+	<h1>Gerer les Employés</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Email</th>
+				<th>Prénom</th>
+				<th>Nom</th>
+				<th>Photo de profil</th>
+				<th>Poste</th>
+				<th>Type de contrat</th>
+				<th>Date d'expiration du contrat</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.firstName }}</td>
+					<td>{{ user.lastName }}</td>
+					<td>{{ user.profilePicture }}</td>
+					<td>{{ user.sector }}</td>
+					<td>{{ user.contractType }}</td>
+					<td>{{ user.contractExpirationDate ? user.contractExpirationDate|date('Y-m-d') : '' }}</td>
+					<td>
+						<a href="{{ path('app_admin_show', {'id': user.id}) }}">voir</a>
+						<a href="{{ path('app_admin_edit', {'id': user.id}) }}">modifier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="11">Aucun employé trouvé</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_admin_new') }}">Ajouter un nouvel employé</a>
+{% endblock %}

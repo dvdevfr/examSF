@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuaire des employés
+{% endblock %}
+{% block navbar %}
+	{{parent()}}
+	<div class="form-outline">
+		<input type="search" id="search" class="form-control" placeholder="Rechercher un employé" aria-label="Search"/>
+	</div>
+{% endblock %}
+{% block body %}
+	<ul class="list-group">
+		{% for user in users %}
+			<li class="list-group-item" data-d="{{user.firstName|upper}} {{user.lastName|upper}}">
+				{{user.firstName|capitalize}}
+				{{user.lastName|upper}}
+				<a href="{{path('app_user_detail',{'id':user.id})}}">
+					<span class="badge">voir les détails</span>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		els = document.querySelector(".list-group").children
+document.querySelector('#search').addEventListener("input", (e) => {
+query = e.target.value.toUpperCase();
+for (el of els) {
+if (el.dataset.d.includes(query)) {
+el.style.display = "block"
+} else {
+el.style.display = "none"
+}
+}
+})
+	</script>
+{% endblock %}
